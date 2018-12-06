@@ -52,7 +52,15 @@
 	<ul>
 		<?php
 			//echo " <br> Ingredientes: <br><br>   ";
+
 			echo $ingredientes;
+
+			for($i = 0; $i < sizeof($ingredientes); $i++){
+				if(is_numeric($ingredientes[i]))
+					echo ("NUMERO: ".$ingredientes[i]."<br>");
+				else
+					echo $ingredientes[i];
+			}
 			//echo " <br><br><br>  Preparo: <br><br>   ";
 			echo $preparo;
 			?>

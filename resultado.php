@@ -74,7 +74,7 @@
 				echo "<li class='receita'>";
 				$Modhtml = str_replace($saudavel, $saboroso, str_get_html($result[0][$i]));
 				//$Modhtml->find('div[id=MediaCard__Thumbnail-zlkxh-1 mFqrq]', 0)->innertext = 'foo';
-				?> <form action="/inf493/resultado2.php" method="get"> <?php
+				?> <form action="/resultado2.php" method="get"> <?php
 				echo $Modhtml; // Output: <div id="hello">foo</div><div id="world" class="bar">World</div>
 				echo "</li>";
 			}  ?> </form> <?php

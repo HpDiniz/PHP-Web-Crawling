@@ -72,6 +72,19 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
+
+
+input[type=text].buton, select {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: red !important;
+}
+
 input.buton {
     width: 10%;
     background-color: red !important;
