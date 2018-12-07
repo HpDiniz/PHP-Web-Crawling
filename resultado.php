@@ -2,7 +2,11 @@
 <html>
 
 	<head>
+		<?php include("login_top.php"); ?>
+		
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<?php
 		
 		include_once('simple_html_dom.php');
@@ -49,7 +53,10 @@
 	</head>
 	
 	<body>
-	<h1>Receitas</h1>
+	
+	<div id="ini"><a href="index.php"><h1>Inicio</h1></a></div>
+	<div id="titp"><h1>Receita na Hora</h1></div>
+	<?php include("login_logoff.php"); ?>
 
 	<div id="divpesquisa" class="divform">
 		<form action="resultado.php" method="get" id="formreceita">
@@ -65,7 +72,7 @@
 		<?php
 
 		$saudavel = array("<a href", "a>");
-		$saboroso   = array("<input type='submit' class='buton' name='Confira' value", " ");
+		$saboroso   = array("<input type='hidden' class='buton' name='Confira' value", " ");
 
 		if(sizeof($result[0]) == 0)
 			echo "Nenhuma receita encontrada";
@@ -74,10 +81,13 @@
 				echo "<li class='receita'>";
 				$Modhtml = str_replace($saudavel, $saboroso, str_get_html($result[0][$i]));
 				//$Modhtml->find('div[id=MediaCard__Thumbnail-zlkxh-1 mFqrq]', 0)->innertext = 'foo';
-				?> <form action="/resultado2.php" method="get"> <?php
+				?> <form action="resultado2.php" method="get"> <?php
 				echo $Modhtml; // Output: <div id="hello">foo</div><div id="world" class="bar">World</div>
+				
+				echo "<input id='subRecei' type='submit' value='Ver Receita'>";
+				?> </form> <?php
 				echo "</li>";
-			}  ?> </form> <?php
+			}
 		}
 
 		/*
@@ -104,5 +114,18 @@
 		}*/
 		?>
 	</ul>
+	
+	<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
     </body>
 </html>

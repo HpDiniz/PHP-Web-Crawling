@@ -2,8 +2,13 @@
 <html>
 
 	<head>
+		<?php include("login_top.php"); ?>
 		<meta charset="utf-8">
 		<?php
+		
+		if( isset($_POST['favorito']) && isset($logado) ){
+			$_SESSION['favorito'][] = $_POST['favorito'];
+		}
 		
 		include_once('simple_html_dom.php');
 
@@ -26,8 +31,8 @@
 			$pieces = explode("Ingredientes", $html);
 			$pieces2 = explode("Instruções", $pieces[1]);
 			$pieces3 = explode("E-mail", $pieces2[1]);
-			$ingredientes = "Ingredientes:"."<br>".$pieces2[0];
-			$preparo = "<br><br>"."Preparo:"."<br>".$pieces3[0];
+			$ingredientes = $pieces2[0];
+			$preparo = explode(".", $pieces3[0]);
 			$titulo = "COMO FAZER: ";
 		}else{
 			$titulo = "CONFIRA: ";
@@ -43,7 +48,10 @@
 	</head>
 	
 	<body>
-	<h1>Receitas</h1>
+	
+	<div id="ini"><a href="index.php"><h1>Inicio</h1></a></div>
+	<div id="titp"><h1>Receita na Hora</h1></div>
+	<?php include("login_logoff.php"); ?>
 
 	<div id="divpesquisa" class="divform">
 			<?php echo $titulo?><br />
@@ -51,19 +59,33 @@
 	
 	<ul>
 		<?php
-			//echo " <br> Ingredientes: <br><br>   ";
-
+			if(is_array($preparo))
+				echo "Ingredientes:"."<br><br><ul><li>";
 			echo $ingredientes;
-
-			for($i = 0; $i < sizeof($ingredientes); $i++){
-				if(is_numeric($ingredientes[i]))
-					echo ("NUMERO: ".$ingredientes[i]."<br>");
-				else
-					echo $ingredientes[i];
-			}
-			//echo " <br><br><br>  Preparo: <br><br>   ";
-			echo $preparo;
+			if(is_array($preparo)){
+				echo "</li></ul><br><br>"."Preparo:"."<br><br>";
+				echo "<ol>";
+				for($i = 0; $i < sizeof($preparo)-1; $i++){
+					if($preparo[$i] != "" && $preparo[$i] != NULL)
+					echo "<li>".$preparo[$i]."."."</li>";
+				} 
+				echo "</ol>";
+			}	
 			?>
 	</ul>
+	
+	<?php
+	if(isset($logado)){
+		echo "<div id='divFav'>";
+
+		echo "<form method='post' action='resultado2.php?Confira=$ing1'>";
+		echo "<input type='hidden' name='favorito' value='$ing1'>";
+		echo "<button type='submit'>Adicionar aos Favoritos</button>";
+		echo "</form>";
+		
+		echo "</div>";
+	}
+	?>
+	
     </body>
 </html>
