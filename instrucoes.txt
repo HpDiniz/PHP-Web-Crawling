@@ -1,0 +1,2 @@
+manter arquivos dentro de uma pasta de nome inf493
+importar banco de dados inf493.sql
